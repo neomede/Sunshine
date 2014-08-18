@@ -36,6 +36,8 @@ import java.util.Date;
  * Created by neomede on 12/08/14.
  */
 public class ForecastFragment extends Fragment {
+
+    private final String LOG_TAG = ForecastFragment.class.getSimpleName();
     private ArrayAdapter<String> mForecastAdapter;
 
     public ForecastFragment() {
@@ -44,6 +46,8 @@ public class ForecastFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d(LOG_TAG, "onCreate");
 
         setHasOptionsMenu(true);
     }
@@ -91,6 +95,36 @@ public class ForecastFragment extends Fragment {
     public void onStart() {
         super.onStart();
         updateWeather();
+
+        Log.d(LOG_TAG, "onCreate");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Log.d(LOG_TAG, "onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        Log.d(LOG_TAG, "onPause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        Log.d(LOG_TAG, "onStop");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        Log.d(LOG_TAG, "onDestroy");
     }
 
     private void updateWeather(){
