@@ -224,26 +224,49 @@ public class WeatherProvider extends ContentProvider{
     }
 
     @Override
-    public int delete(Uri uri, String s, String[] strings) {
-        return 0;
-//        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-//        final int match = sUriMatcher.match(uri);
-//        Uri returnUri;
-//
-//        switch (match){
-//            case WEATHER:
-//                break;
-//            case LOCATION:
-//                break;
-//            default:
-//                throw new UnsupportedOperationException("Unknown uri: " + uri);
-//        }
-//
-//        return returnUri;
+    public int delete(Uri uri, String whereClause, String[] whereArgs) {
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        final int match = sUriMatcher.match(uri);
+        int rowsDeleted;
+
+        switch (match) {
+            case WEATHER: {
+                rowsDeleted = db.delete(WeatherContract.WeatherEntry.TABLE_NAME, whereClause, whereArgs);
+                break;
+            }
+            case LOCATION: {
+                rowsDeleted = db.delete(WeatherContract.LocationEntry.TABLE_NAME, whereClause, whereArgs);
+                break;
+            }
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+        if(whereClause == null || rowsDeleted != 0){
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return rowsDeleted;
     }
 
     @Override
-    public int update(Uri uri, ContentValues contentValues, String s, String[] strings) {
-        return 0;
+    public int update(Uri uri, ContentValues contentValues, String whereClause, String[] whereArgs) {
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        final int match = sUriMatcher.match(uri);
+        int rowsUpdated;
+        switch (match) {
+            case WEATHER: {
+                rowsUpdated = db.update(WeatherContract.WeatherEntry.TABLE_NAME, contentValues, whereClause, whereArgs);
+                break;
+            }
+            case LOCATION: {
+                rowsUpdated = db.update(WeatherContract.LocationEntry.TABLE_NAME, contentValues, whereClause, whereArgs);
+                break;
+            }
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+        if(rowsUpdated != 0){
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return rowsUpdated;
     }
 }
