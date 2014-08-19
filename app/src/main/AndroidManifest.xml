@@ -34,7 +34,9 @@
         </activity>
         <provider
             android:authorities="com.neomede.sunshine.app"
-            android:name=".data.WeatherProvider" />
+            android:name=".data.WeatherProvider"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
