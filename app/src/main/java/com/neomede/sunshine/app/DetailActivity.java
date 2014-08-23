@@ -9,6 +9,7 @@ import android.view.MenuItem;
 public class DetailActivity extends ActionBarActivity {
     private static final int DETAIL_LOADER = 0;
     public static final String DATE_KEY = "date";
+    public static final String POSITION_KEY = "position";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
