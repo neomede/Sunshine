@@ -10,7 +10,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 
-import com.neomede.sunshine.app.FetchWeatherTask;
 import com.neomede.sunshine.app.data.WeatherContract;
 
 import org.json.JSONArray;
@@ -33,7 +32,7 @@ public class SunshineService extends IntentService{
 
     private static final String SERVICE_NAME = "SunshineService";
     public static final String LOCATION_QUERY_EXTRA = "lqe";
-    private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
+    private final String LOG_TAG = SunshineService.class.getSimpleName();
 
     public SunshineService() {
         super(SERVICE_NAME);
